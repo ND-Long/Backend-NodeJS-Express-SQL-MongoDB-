@@ -1,9 +1,10 @@
 const connection = require("../config/database")
+const { getAllUsers } = require('../services/CRUDService')
+
 
 const getHomepage = async (req, res) => {
-    const [results, fields] = await connection.query('SELECT * FROM Users u')
-    console.log(results)
-    return res.render('homePage.ejs')
+    const results = await getAllUsers()
+    return res.render('homePage.ejs', { listUsers: results })
 }
 
 
@@ -25,12 +26,9 @@ const postCreateUser = async (req, res) => {
     res.send("Create success!")
 }
 
-const getAllUser = async (req, res) => {
 
-}
 
 module.exports = {
-    getHomepage,
-    postCreateUser, getCreateUserPage
-    , getAllUser
+    getHomepage, postCreateUser, getCreateUserPage
+
 }

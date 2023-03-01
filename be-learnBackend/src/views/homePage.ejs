@@ -21,17 +21,11 @@
         }
 
         tr:hover {
-            background-color: rgb(224, 224, 224);
+            background-color: rgb(223, 223, 223);
         }
 
         .list-user {
-            padding: 40px 30px;
-        }
-
-        table,
-        th,
-        td {
-            border: 1px solid gray;
+            padding: 50px 50px;
         }
     </style>
 </head>
@@ -42,6 +36,7 @@
         <a href="/create">Create User</a>
     </div>
     <div class="list-user">
+        <h3>List User</h3>
         <table class="table-list-users">
             <thead>
                 <tr class="w3-light-grey">
@@ -49,26 +44,52 @@
                     <th>Email</th>
                     <th>Name</th>
                     <th>City</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
-            <tr>
-                <td>Jill</td>
-                <td>Smith</td>
-                <td>50</td>
-                <td>50</td>
-            </tr>
-            <tr>
-                <td>Eve</td>
-                <td>Jackson</td>
-                <td>94</td>
-                <td>94</td>
-            </tr>
-            <tr>
-                <td>Adam</td>
-                <td>Johnson</td>
-                <td>67</td>
-                <td>67</td>
-            </tr>
+
+            <!-- <% for(var i=0;i< listUsers.length;i++){%>
+                <tr>
+                    <td>
+                        <%=listUsers[i].id%>
+                    </td>
+                    <td>
+                        <%=listUsers[i].email%>
+                    </td>
+                    <td>
+                        <%=listUsers[i].name%>
+                    </td>
+                    <td>
+                        <%=listUsers[i].city%>
+                    </td>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                </tr>
+                <%}%> -->
+
+            <%listUsers.forEach((user,index)=>{%>
+                <tr>
+                    <td>
+                        <%=user.id%>
+                    </td>
+                    <td>
+                        <%=user.email%>
+                    </td>
+                    <td>
+                        <%=user.name%>
+                    </td>
+                    <td>
+                        <%=user.city%>
+                    </td>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                </tr>
+
+                <% }) %>
         </table>
     </div>
 </body>
