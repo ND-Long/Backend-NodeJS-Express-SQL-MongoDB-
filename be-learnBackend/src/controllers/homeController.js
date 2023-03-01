@@ -21,8 +21,12 @@ const getSigninPage = (req, res) => {
     res.send('Signin page here')
 }
 
+const postCreateUser = (req, res) => {
+    console.log(">>>req.body", req.body)
+    res.send("create a user")
+}
+
 module.exports = {
-    getHomepage,
-    getLoginPage,
-    getSigninPage
+    getHomepage, getLoginPage, getSigninPage,
+    postCreateUser
 }

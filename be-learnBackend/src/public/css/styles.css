@@ -33,3 +33,13 @@
     background-color: #04AA6D;
     color: white;
 }
+
+.form {
+    width: 60%;
+    margin: auto;
+    padding: 50px;
+}
+
+fieldset {
+    padding: 20px;
+}

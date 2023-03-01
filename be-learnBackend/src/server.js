@@ -8,6 +8,9 @@ const hostname = process.env.HOST_NAME;
 const webRoutes = require('./routes/web')
 const connection = require('./config/database')
 
+//config req.body
+app.use(express.json()) //for json
+app.use(express.urlencoded({ extended: true })); //for form data
 //config template engine 
 configViewEngine(app)
 
