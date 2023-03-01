@@ -1,15 +1,17 @@
 const express = require('express')
 const router = express.Router()
-const { getHomepage, getLoginPage, getSigninPage, postCreateUser } = require('../controllers/homeController')
+const { getHomepage, postCreateUser, getCreateUserPage } = require('../controllers/homeController')
 
 
 
 //router.Method("./route",handler)
 router.get('/', getHomepage)
 
-router.get('/login', getLoginPage)
+router.get('/create', getCreateUserPage)
 
-router.get('/signin', getSigninPage)
 router.post('/create-user', postCreateUser)
+
+
+
 
 module.exports = router //export default

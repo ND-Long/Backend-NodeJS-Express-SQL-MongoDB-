@@ -21,12 +21,10 @@ app.listen(port, hostname, () => {
     console.log(`Example app listening on port ${port}-${hostname}`)
 })
 
-//test connection
-connection.query(
-    'SELECT * FROM Users u',
-    function (err, results, fields) {
-        // console.log(">>>check results server:", results); // results contains rows returned by server
-        // console.log(">>>fields:", fields); // fields contains extra meta data about results, if available
-    }
-);
+//test connection callback
+// connection.query(
+//     'SELECT * FROM Users u',
+//     function (err, results, fields) {
+//     }
+// );
 

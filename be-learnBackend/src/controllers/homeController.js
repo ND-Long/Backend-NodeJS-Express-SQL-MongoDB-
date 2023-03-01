@@ -1,32 +1,36 @@
 const connection = require("../config/database")
 
-const getHomepage = (req, res) => {
+const getHomepage = async (req, res) => {
+    const [results, fields] = await connection.query('SELECT * FROM Users u')
+    console.log(results)
     return res.render('homePage.ejs')
 }
 
-const getLoginPage = (req, res) => {
-    let users = []
 
-    connection.query(
-        'SELECT * FROM Users u',
-        function (err, results, fields) {
-            users = results
-            res.send(JSON.stringify(users)); // results contains rows returned by server
-            // console.log(">>>fields:", fields); // fields contains extra meta data about results, if available
-        }
+const getCreateUserPage = (req, res) => {
+    return res.render('createUser.ejs')
+}
+
+
+
+const postCreateUser = async (req, res) => {
+    let email = req.body.email
+    let name = req.body.name
+    let city = req.body.city
+
+    const [results, fields] = await connection.query(
+        `INSERT INTO Users (email, name,city) VALUES (?,?,?)`,
+        [email, name, city],
     );
+    res.send("Create success!")
 }
 
-const getSigninPage = (req, res) => {
-    res.send('Signin page here')
-}
+const getAllUser = async (req, res) => {
 
-const postCreateUser = (req, res) => {
-    console.log(">>>req.body", req.body)
-    res.send("create a user")
 }
 
 module.exports = {
-    getHomepage, getLoginPage, getSigninPage,
-    postCreateUser
+    getHomepage,
+    postCreateUser, getCreateUserPage
+    , getAllUser
 }
