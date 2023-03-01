@@ -1,28 +1,29 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
-require('dotenv').config();
-
-
-//import express
-
+const configViewEngine = require('./config/viewEngine')
 const app = express()
 const port = process.env.PORT || 3000;
 const hostname = process.env.HOST_NAME;
+const webRoutes = require('./routes/web')
+const connection = require('./config/database')
 
 //config template engine 
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'ejs')
+configViewEngine(app)
 
-//cosfig static files: image/css/js
-app.use(express.static(__dirname + '/public'));
-// app.use('/static', express.static(path.join(__dirname, 'public')))
-
-//khai báo route
-app.get('/', (req, res) => {
-    res.render('sample.ejs')
-})
-
+//declare routes
+app.use('/', webRoutes)
 
 app.listen(port, hostname, () => {
     console.log(`Example app listening on port ${port}-${hostname}`)
 })
+
+//test connection
+connection.query(
+    'SELECT * FROM Users u',
+    function (err, results, fields) {
+        // console.log(">>>check results server:", results); // results contains rows returned by server
+        // console.log(">>>fields:", fields); // fields contains extra meta data about results, if available
+    }
+);
+
