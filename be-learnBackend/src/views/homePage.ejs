@@ -84,8 +84,12 @@
                         <%=user.city%>
                     </td>
                     <td>
-                        <button>Edit</button>
-                        <button>Delete</button>
+                        <form action="/update/<%=user.id%>" method="GET">
+                            <button>Edit</button>
+                        </form>
+                        <form action="/delete/<%=user.id%>" method="POST">
+                            <button>Delete</button>
+                        </form>
                     </td>
                 </tr>
 

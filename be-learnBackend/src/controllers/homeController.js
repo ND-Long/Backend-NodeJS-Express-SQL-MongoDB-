@@ -23,12 +23,46 @@ const postCreateUser = async (req, res) => {
         `INSERT INTO Users (email, name,city) VALUES (?,?,?)`,
         [email, name, city],
     );
-    res.send("Create success!")
+    res.render("Create success!")
+}
+
+const getUpdateUserPage = async (req, res) => {
+    let userId = req.params.id
+    const [results, fields] = await connection.query(`select * from Users where id = ${userId}`)
+    const user = results && results.length > 0 ? results[0] : {}
+    res.render('updateUser.ejs', { userInfo: user })
+}
+
+const postUpdateUser = async (req, res) => {
+    let email = req.body.email
+    let name = req.body.name
+    let city = req.body.city
+    let userId = req.body.userId
+    const [results, fields] = await connection.query(`update Users 
+    set email =?,name=?,city=?
+    where id = ?`, [email, name, city, userId])
+    res.send("Update success!")
+}
+
+const postDeleteUser = async (req, res) => {
+    let userId = req.params.id
+    const [results, fields] = await connection.query(`select * from Users where id = ${userId}`)
+    const user = results && results.length > 0 ? results[0] : {}
+    res.render("deleteUser.ejs", { userInfor: user })
+}
+
+
+const postHandleDeleteUser = async (req, res) => {
+    let userId = req.body.id
+    const [results, fields] = await connection.query(`DELETE FROM Users WHERE id=?`, [userId])
+    console.log(userId)
+    res.send("Deleted")
 }
 
 
 
 module.exports = {
-    getHomepage, postCreateUser, getCreateUserPage
-
+    getHomepage, postCreateUser, getCreateUserPage,
+    getUpdateUserPage, postUpdateUser, postDeleteUser,
+    postHandleDeleteUser
 }
