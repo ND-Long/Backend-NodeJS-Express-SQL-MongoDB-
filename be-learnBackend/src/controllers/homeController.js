@@ -23,7 +23,7 @@ const postCreateUser = async (req, res) => {
         `INSERT INTO Users (email, name,city) VALUES (?,?,?)`,
         [email, name, city],
     );
-    res.render("Create success!")
+    res.redirect("/")
 }
 
 const getUpdateUserPage = async (req, res) => {
@@ -41,7 +41,7 @@ const postUpdateUser = async (req, res) => {
     const [results, fields] = await connection.query(`update Users 
     set email =?,name=?,city=?
     where id = ?`, [email, name, city, userId])
-    res.send("Update success!")
+    res.redirect("/")
 }
 
 const postDeleteUser = async (req, res) => {
@@ -56,7 +56,7 @@ const postHandleDeleteUser = async (req, res) => {
     let userId = req.body.id
     const [results, fields] = await connection.query(`DELETE FROM Users WHERE id=?`, [userId])
     console.log(userId)
-    res.send("Deleted")
+    res.redirect("/")
 }
 
 
